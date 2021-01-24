@@ -12,5 +12,6 @@ data class Account (
         var id: Long? = null,
         var name: String? = null,
         var mail: String? = null,
-        var password: String? = null
+        var password: String? = null,
+        var isDefinitiveRegistration: Boolean = false
 )

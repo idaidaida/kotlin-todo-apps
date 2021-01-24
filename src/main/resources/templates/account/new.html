@@ -1,0 +1,28 @@
+{{> /common/header}}
+<div class="container py-3">
+    <h1>Create Account</h1>
+    {{#account}}
+    <form action="/accounts/provisionalRegist" method="POST" name="account">
+        <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" name="name" value="{{#name}}{{name}}{{/name}}">
+        </div>
+        <div class="form-group">
+            <label for="">Email Address</label>
+            <input type="email" class="form-control" name="mail" value="{{#mail}}{{mail}}{{/mail}}">
+        </div>
+        <div class="form-group">
+            <label for="">Password</label>
+            <input type="password" class="form-control" name="password" value="{{#password}}{{password}}{{/password}}">
+        </div>
+        <div class="form-group">
+            <label for="">Confirm Password</label>
+            <input type="password" class="form-control" name="confirm_password" value="{{#password}}{{password}}{{/password}}">
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </div>
+    </form>
+    {{/account}}
+</div>
+{{> /common/footer}}
