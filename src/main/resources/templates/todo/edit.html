@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
+<head>
+    <title>Todos</title>
+</head>
+<body>
+    <div class="container py-3">
+        <h1>Edit Todo</h1>
+        <form th:action="@{/todos/{id}/update(id=${todo.id})}" method="POST" th:object="${todo}">
+            <div th:replace="common/messages :: validation-messages"></div>
+            <div class="form-group">
+                <label for="">Todo title</label>
+                <input type="text" th:field="*{title}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">finished?</label>
+                <input type="checkbox" th:field="*{isDone}" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>

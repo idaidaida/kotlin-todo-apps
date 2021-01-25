@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>display messages</title>
+
+</head>
+<body>
+    <!-- 入力チェック用のメッセージ -->
+    <div th:fragment="validation-messages">
+        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+            <span th:if="${#fields.hasErrors()}" th:errors="*">エラー</span><br />
+        </div>
+        <div class="alert alert-danger" th:if="${error_message}">
+            <span th:if="${error_message}" th:text="${error_message}">エラー</span><br />
+        </div>
+    </div>
+    <!-- 汎用的なフラッシュメッセージ -->
+    <div th:fragment="flush-messages">
+        <div class="alert alert-danger" th:if="${flush_danger_message}">
+            <span th:text="${flush_danger_message}"></span>
+        </div>
+        <div class="alert alert-info" th:if="${flush_info_message}">
+            <span th:text="${flush_info_message}"></span>
+        </div>
+    </div>
+</body>
+</html>
+

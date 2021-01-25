@@ -1,8 +1,6 @@
 package com.example.todo.repository
 
 import com.example.todo.model.Todo
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
+import org.springframework.data.repository.CrudRepository
 
-@Repository
-interface TodoRepository: JpaRepository<Todo, Long> {}
+interface TodoRepository: CrudRepository<Todo, Long> {}

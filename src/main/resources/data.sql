@@ -1,0 +1,1 @@
+INSERT INTO Account(id,name,mail,password,IS_DEFINITIVE_REGISTRATION) VALUES (1,'guest','guest@example.com','password',true);

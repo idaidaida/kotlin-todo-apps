@@ -1,10 +1,16 @@
-{{> /common/header}}
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
+<head>
+    <title>Todos</title>
+</head>
+<body>
     <div class="container py-3">
         <h1>Todo List</h1>
-        <form action="/todos" method="POST" class="py-4">
+        <form th:action="@{/todos}" th:object="${todo}" method="POST" class="py-4">
+            <div th:replace="common/messages :: validation-messages"></div>
             <div class="row">
                 <div class="input-group col-8 offset-2">
-                    <input type="text" class="form-control" name="title">
+                    <input type="text" class="form-control" th:field="*{title}" placeholder="input new task ....">
                     <div class="input-group-append">
                         <input type="submit" value="Add Todo" class="btn btn-primary" />
                     </div>
@@ -12,11 +18,24 @@
             </div>
         </form>
         <div id="todo-list" class="my-3">
-            <ul class="list-group">
-                {{#todos}}
-                <li class="list-group-item py-3">{{title}}</li>
-                {{/todos}}
+            <ul class="list-group" th:each="todo:${todos}">
+                <li class="list-group-item py-1">
+                    <div class="text-small text-muted" th:text="${todo.createdBy.name}">
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center">
+                            <s th:if="${todo.isDone}"><span class="lead" th:text="${todo.title}"></span></s>
+                            <span class="lead" th:text="${todo.title}" th:unless="${todo.isDone}"></span>
+                            <span class="ml-auto">
+                                <a th:href="@{/todos/{id}/edit(id=${todo.id})}" class="btn btn-success">Edit</a>
+                                <form th:action="@{/todos/{id}/delete(id=${todo.id})}" method="POST" class="d-inline-block">
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                </form>
+                            </span>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
-{{> /common/footer}}
+</body>

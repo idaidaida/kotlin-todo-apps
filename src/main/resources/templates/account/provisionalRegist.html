@@ -1,9 +1,14 @@
-{{> /common/header}}
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
+<head>
+    <title>Accounts</title>
+</head>
+<body>
 <div class="container py-3">
-    <h1>Provisional registration</h1>
+    <h1>Check your mailbox</h1>
     <p class="py-5">
-        Thank you for registering!!<br>
-        We sent you e-mail to verificate your e-mail address. Please check your inbox and click the link on e-mail body to complete registration.
+        For verify your mail address, we sent you e-mail.<br>
+        Please check your mailbox and click the link on e-mail body to finish registration.
     </p>
 </div>
-{{> /common/footer}}
+</body>

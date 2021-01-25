@@ -1,32 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
 <head>
-    <title>Accounts</title>
+    <title>Todos</title>
 </head>
 <body>
 <div class="container py-3">
-    <h1>Create Account</h1>
-    <form th:action="@{/accounts/provisionalRegist}" method="POST" th:object="${accountCreateForm}">
+    <h1>Login</h1>
+    <form th:action="@{/login}" method="POST" th:object="${loginForm}">
         <div th:replace="common/messages :: validation-messages"></div>
         <div class="form-group">
             <label for="">Name</label>
             <input type="text" class="form-control" th:field="*{name}" autocomplete="off">
         </div>
         <div class="form-group">
-            <label for="">Email Address</label>
-            <input type="email" class="form-control" th:field="*{mail}" autocomplete="off">
-        </div>
-        <div class="form-group">
             <label for="">Password</label>
             <input type="password" class="form-control" th:field="*{password}" autocomplete="off">
         </div>
         <div class="form-group">
-            <label for="">Confirm Password</label>
-            <input type="password" class="form-control" th:field="*{passwordConfirm}" autocomplete="off">
-        </div>
-        <div class="form-group">
             <input type="submit" class="btn btn-primary" value="Submit">
         </div>
+        <a href="/accounts/new" class="">Create your account</a>
     </form>
 </div>
 </body>

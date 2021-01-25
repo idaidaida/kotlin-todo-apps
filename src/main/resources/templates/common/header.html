@@ -1,13 +1,44 @@
-<!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Todo Apps</title>
+    <title>header</title>
 </head>
 <body>
-    <nav class="nav navbar navbar-dark bg-primary">
-        <div class="container">
-            <a href="#" class="navbar-brand">Todo Apps</a>
+    <div th:fragment="header" th:remove="tag">
+        <nav class="nav navbar navbar-light bg-light">
+            <div class="container">
+                <span href="#" class="navbar-brand">Todo Apps</span>
+                <div class="form-inline" th:if="${@loginSession.isLogined}">
+                    <button type="button" class="btn btn-default text-danger" data-toggle="modal" data-target="#closeModal">
+                        Withdrew....
+                    </button>
+                    <a href="/login/delete" class="btn btn-warning text-white">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-3">
+            <div th:replace="common/messages :: flush-messages"></div>
         </div>
-    </nav>
+        <!-- Modal -->
+        <div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Withdrew this site</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Would you like to withdrew this site and delete your account ?
+                        <form th:action="@{/accounts/delete}" method="POST" class="my-4">
+                            <input type="submit" class="btn btn-danger" value="Withdrew and delete account" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

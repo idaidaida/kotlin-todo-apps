@@ -1,8 +1,8 @@
 package com.example.todo.repository
 
 import com.example.todo.model.Account
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
+import org.springframework.data.repository.CrudRepository
 
-@Repository
-interface AccountRepository: JpaRepository<Account, Long> {}
+interface AccountRepository: CrudRepository<Account, Long> {
+    fun findByNameAndPassword(name: String,password: String): List<Account>
+}
