@@ -30,6 +30,8 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.codeborne:selenide:5.18.0")
+
 }
 
 tasks.withType<KotlinCompile> {

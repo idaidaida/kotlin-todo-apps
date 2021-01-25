@@ -13,7 +13,7 @@ import java.io.Serializable
 class LoginSession(val accountRepository: AccountRepository): Serializable {
     var isLogined: Boolean = false
     var accountId: Long? = null
-    // いらない
+
     private val serialVersionUID = 1L
 
     fun create(account: Account){
@@ -26,7 +26,6 @@ class LoginSession(val accountRepository: AccountRepository): Serializable {
     }
 
     fun getLoginAccount(): Account?{
-        // TODO accountIdがNullなことある
         return accountRepository.findByIdOrNull(this.accountId!!)
     }
 

@@ -9,10 +9,10 @@ import java.net.URLEncoder
 @Service
 class SendMailService(val mailSender: MailSender) {
 
+    // send mail is very slow
+    // so i use Async
     @Async
     fun sendProvisionRegisterMail(id: Long,to: String,hashValue: String){
-        // TODO 非同期にする
-        // TODO メールアドレスをyuuhei03110311じゃなくする
         val msg = SimpleMailMessage()
         msg.setFrom("no-replay@example.com")
         msg.setTo(to)

@@ -8,8 +8,8 @@ import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import templates.extention.generateHashValue
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 
 @RequestMapping("/login")
 @Controller
@@ -17,7 +17,6 @@ class LoginController(val accountRepository: AccountRepository,val loginSession:
 
     @GetMapping("")
     fun new(model: Model): String{
-        // ログインフォームを表示
         val loginForm = LoginForm()
         model.addAttribute("loginForm",loginForm)
         return "login/new"
@@ -25,37 +24,43 @@ class LoginController(val accountRepository: AccountRepository,val loginSession:
 
     @PostMapping("")
     fun create(@ModelAttribute @Validated loginForm: LoginForm, result: BindingResult, model: Model,redirectModel: RedirectAttributes): String{
-
-        // 入力チェック
+        // check input value
         if (result.hasErrors()) {
             return "/login/new"
         }
-
-        // TODO パスワードは暗号化
-        // TODO 狩り登録は除外
-        // TODO ログインチェックをFilterに移す
-        val account = accountRepository.findByNameAndPassword(loginForm.name,loginForm.password)
+        // password authentication
+        // password is stored as hash value
+        val account = accountRepository.findByNameAndPassword(loginForm.name,loginForm.password.generateHashValue())
         if(account.size == 1){
+            // check mail verification
+            if(!account[0].isVerifiedMailAddress){
+                model.addAttribute("error_message","your mail address is not verified yet. please check your mailbox, and click link on mail body to verify your mail address")
+                return "/login"
+            }
+            // login
             loginSession.create(account[0])
-            println("Login Success")
         }else{
-            println("Login Failed")
+            model.addAttribute("error_message","name or password is wrong")
+            return "/login"
         }
+        // redirect to todo list
         redirectModel.addFlashAttribute("flush_info_message", "Login successfully.");
         return "redirect:/todos"
     }
 
     @GetMapping("/delete")
     fun delete(redirectModel: RedirectAttributes): String{
+        // logout
         loginSession.destroy()
         redirectModel.addFlashAttribute("flush_info_message", "Logout successfully.");
         return "redirect:/login"
     }
 
+    // login form
     data class LoginForm(
             @field:NotBlank
             val name: String = "",
-            @field:NotEmpty
+            @field:NotBlank
             val password: String = ""
     )
 
