@@ -21,6 +21,14 @@ class LoginCheckFilter(val loginSession: LoginSession): Filter {
             "/accounts/create/.*"
     )
 
+    override fun init(filterConfig: FilterConfig){
+        //Filter.super.init(filterConfig)
+    }
+
+    override fun destroy(){
+        //Filter.super.init(filterConfig)
+    }
+
     // check if url is accessible without login.
     override fun doFilter(request: ServletRequest,response: ServletResponse,chain: FilterChain){
         // get URI from URL

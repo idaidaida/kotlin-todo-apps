@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
+      th:replace="~{common/template :: baseLayout(~{::title},~{::body/content()})}">
 <head>
     <title>Todos</title>
 </head>
@@ -7,19 +7,25 @@
 <div class="container py-3">
     <section>
         <h1 class="display-h1">This is atractive todo application !!</h1>
-        <p class="lead">
+        <p class="lead py-3">
             This is just demo application.<br>
-            You can enjoy this application, but please delete your account when you finish playing.<br>
+            A few days later, We will delete application data and close web site.<br>
             For guest user, we prepare following guest account.<br>
             If you would not like to create account, please use following account.<br>
         </p>
-        <ul>
-            <li>Name:guest</li>
-            <li>Password:password</li>
-        </ul>
+    </section>
+    <section>
+        <div class="card my-3 bg-light">
+            <div class="card-body">
+                <div>Name:tarou</div>
+                <div>Password:password</div>
+            </div>
+        </div>
     </section>
     <div class="my-2">
-        <a href="/login" class="btn btn-primary" id="loginLink">Login</a>
+        <div class="my-2">
+            <a href="/login" class="btn btn-primary" id="loginLink">Go to login form</a>
+        </div>
         <a href="/accounts/new" class="">Create your account</a>
     </div>
 </div>

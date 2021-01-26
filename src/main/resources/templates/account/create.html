@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/common/template :: baseLayout(~{::title},~{::body/content()})}">
+      th:replace="~{common/template :: baseLayout(~{::title},~{::body/content()})}">
 <head>
     <title>Accounts</title>
 </head>
@@ -11,7 +11,7 @@
             Thank you for registering!!<br>
             Enjoy our attractive application !!
         </p>
-        <a href="/" class="btn btn-outline-primary">Go Login Form</a>
+        <a href="/login" class="btn btn-outline-primary">Go to login form</a>
     </div>
     <div th:unless="${isSuccess}">
         <h1>Registration failure</h1>

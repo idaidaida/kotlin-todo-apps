@@ -23,17 +23,20 @@ class AccountController(val accountRepository: AccountRepository, val mailSender
     fun new(model: Model): String{
         val accountCreateForm = AccountController.AccountCreateForm()
         model.addAttribute("accountCreateForm",accountCreateForm)
-        return "/account/new"
+        return "account/new"
     }
 
     @PostMapping("/provisionalRegist")
     fun provisionalRegist(@ModelAttribute @Validated accountCreateForm: AccountCreateForm, result: BindingResult, model: Model): String{
         // check input value
         if (result.hasErrors()) {
-            return "/account/new"
+            return "account/new"
         }else if(accountCreateForm.password != accountCreateForm.passwordConfirm){
             model.addAttribute("error_message","password and confirm_password are different")
-            return "/account/new"
+            return "account/new"
+        }else if(accountRepository.findByName(accountCreateForm.name!!).size > 0){
+            model.addAttribute("error_message","The account name ${accountCreateForm.name} is already used.")
+            return "account/new"
         }
         // insert account data
         // personalHashValue is used to identify user when verifying account mail address
@@ -59,7 +62,7 @@ class AccountController(val accountRepository: AccountRepository, val mailSender
             accountRepository.save(account)
             model.addAttribute("isSuccess",true)
         }else{
-            // when somthing is wrong...
+            // somthing is wrong...
             model.addAttribute("isSuccess",false)
         }
         return "account/create"
@@ -74,7 +77,8 @@ class AccountController(val accountRepository: AccountRepository, val mailSender
             redirectModel.addFlashAttribute("flush_danger_message", "You can't delete guest account.");
             return "redirect:/todos"
         }
-        // logout
+        // delete account data and delete login session
+        accountRepository.deleteById(account?.id!!)
         loginSession.destroy()
         return "redirect:/"
     }

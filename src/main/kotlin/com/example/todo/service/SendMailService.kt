@@ -18,7 +18,7 @@ class SendMailService(val mailSender: MailSender) {
         msg.setTo(to)
         msg.setSubject("【Todo Apps】 Confirm your e-mail address")
         val encodedTo = URLEncoder.encode(to,"UTF-8")
-        msg.setText("Click below link to verification\n http://localhost:8080/accounts/create/${id}/${hashValue}")
+        msg.setText("Click below link to verification\n https://just-todo-apps.herokuapp.com/accounts/create/${id}/${hashValue}")
         mailSender.send(msg)
     }
 }

@@ -8,7 +8,7 @@ class CommonController {
 
     @GetMapping("")
     fun index(): String{
-        return "/index"
+        return "index"
     }
 
 }

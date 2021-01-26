@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.4.21"
 	kotlin("plugin.spring") version "1.4.21"
 	kotlin("plugin.jpa") version "1.4.21"
+	id("war")
 }
 
 group = "com.example"
@@ -31,6 +32,8 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("com.codeborne:selenide:5.18.0")
+	//runtimeOnly("org.postgresql:postgresql")
+	//implementation("com.github.jsimone:webapp-runner:8.5.11.3")
 
 }
 
@@ -44,3 +47,4 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+

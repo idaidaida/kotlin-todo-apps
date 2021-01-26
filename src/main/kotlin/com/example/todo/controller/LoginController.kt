@@ -26,7 +26,7 @@ class LoginController(val accountRepository: AccountRepository,val loginSession:
     fun create(@ModelAttribute @Validated loginForm: LoginForm, result: BindingResult, model: Model,redirectModel: RedirectAttributes): String{
         // check input value
         if (result.hasErrors()) {
-            return "/login/new"
+            return "login/new"
         }
         // password authentication
         // password is stored as hash value
@@ -35,13 +35,13 @@ class LoginController(val accountRepository: AccountRepository,val loginSession:
             // check mail verification
             if(!account[0].isVerifiedMailAddress){
                 model.addAttribute("error_message","your mail address is not verified yet. please check your mailbox, and click link on mail body to verify your mail address")
-                return "/login"
+                return "login/new"
             }
             // login
             loginSession.create(account[0])
         }else{
             model.addAttribute("error_message","name or password is wrong")
-            return "/login"
+            return "login/new"
         }
         // redirect to todo list
         redirectModel.addFlashAttribute("flush_info_message", "Login successfully.");

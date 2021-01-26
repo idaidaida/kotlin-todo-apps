@@ -18,7 +18,7 @@ class TodoController(val todoRepository: TodoRepository,val loginSession: LoginS
     @GetMapping("")
     fun index(model: Model): String{
         // select login user's todo
-        val todos = todoRepository.findByCreatedBy(loginSession.getLoginAccountId()!!)
+        val todos = todoRepository.findByCreatedBy(loginSession.getLoginAccount()!!)
         model.addAttribute("todos",todos)
         // generate todo object for create form
         val todo = Todo()
@@ -30,14 +30,14 @@ class TodoController(val todoRepository: TodoRepository,val loginSession: LoginS
     fun create(@ModelAttribute @Validated todo: Todo, result: BindingResult, model: Model,redirectModel: RedirectAttributes): String {
         // check input value
         if (result.hasErrors()) {
-            return "/todo/index"
+            return "todo/index"
         }
         // set createdBy and insert todo data
         todo.createdBy = loginSession.getLoginAccount()
         todoRepository.save(todo)
         // redirect to todo list page
         redirectModel.addFlashAttribute("flush_info_message", "Create new todo successfully.");
-        return "redirect:todos"
+        return "redirect:/todos"
     }
 
     @GetMapping("/{id}/edit")

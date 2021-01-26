@@ -6,7 +6,7 @@
     <div th:fragment="header" th:remove="tag">
         <nav class="nav navbar navbar-light bg-light">
             <div class="container">
-                <span href="#" class="navbar-brand">Todo Apps</span>
+                <a href="/" class="navbar-brand">Todo Apps</a>
                 <div class="form-inline" th:if="${@loginSession.isLogined}">
                     <button type="button" class="btn btn-default text-danger" data-toggle="modal" data-target="#closeModal">
                         Withdrew....
