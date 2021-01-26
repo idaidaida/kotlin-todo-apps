@@ -2,11 +2,6 @@
 this is todo applictaion created by Kotlin.
 
 # DEMO
-Sample movie.
-
-
-
-
 https://just-todo-apps.herokuapp.com/
 
 NOTE!!<br>
