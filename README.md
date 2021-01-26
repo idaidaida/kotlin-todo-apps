@@ -13,10 +13,6 @@ A few days later, I will delete data and close web site.
 Nothing.<br>
 Just simple todo application.
 
-# Run Locally
-1. clone this repository<br>
-2. execute gradle task -bootRun-
-
 # Technical composition
 - Spring boot
 - thymeleaf
