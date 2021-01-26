@@ -1,6 +1,5 @@
 # Kotlin todo application
 this is todo applictaion created by Kotlin.
-this is not pratical, just for study Kotlin.
 
 # DEMO
 Sample movie.
