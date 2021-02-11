@@ -18,7 +18,9 @@ class LoginCheckFilter(val loginSession: LoginSession): Filter {
             "/accounts",
             "/accounts/new",
             "/accounts/provisionalRegist",
-            "/accounts/create/.*"
+            "/accounts/create/.*",
+            "/vender/.*",
+            "/original/.*"
     )
 
     override fun init(filterConfig: FilterConfig){
