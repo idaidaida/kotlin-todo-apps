@@ -6,9 +6,7 @@ plugins {
 	kotlin("jvm") version "1.4.21"
 	kotlin("plugin.spring") version "1.4.21"
 	kotlin("plugin.jpa") version "1.4.21"
-	id("war")
 }
-
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -29,10 +27,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("javax.validation:validation-api")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("com.codeborne:selenide:5.18.0")
-	//runtimeOnly("org.postgresql:postgresql")
+	//runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
 	//implementation("com.github.jsimone:webapp-runner:8.5.11.3")
 
 }
